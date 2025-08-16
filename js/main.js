@@ -71,7 +71,7 @@
 			if ($(this).hasClass('f1')) {
 				font = 'Arial, sans-serif';
 			} else if ($(this).hasClass('f2')) {
-				font = '"Times New Roman", serif';
+				font = 'OpenDyslexic, sans-serif';
 			} else if ($(this).hasClass('f3')) {
 				font = '"Comic Sans MS", cursive, sans-serif';
 			}
@@ -85,5 +85,64 @@
 		}
 	});
 
+	// Contrast slider
+	$('#contrastSlider').on('input', function () {
+		let value = $(this).val(); // 0 - 100
+		let lightness = value;     // map slider to lightness in HSL
 
+		// Select all text elements except links/inputs inside #nav-aside and font-sample elements
+		$('body, body *').not('.on text, .off text, .font-sample, .font-sample *').each(function () {
+			let $el = $(this);
+
+			// Skip links and inputs inside #nav-aside
+			if ($el.closest('#nav-aside').length && ($el.is('a') || $el.is('input'))) {
+				return; // skip this element
+			}
+
+			// Only apply color to elements that contain text
+			if ($el.children().length === 0 || $el.is('span, p, h1, h2, h3, h4, h5, h6, li, a')) {
+				$el.css('color', `hsl(0, 0%, ${lightness}%)`);
+			}
+		});
+	});
+
+
+	// Store original sizes (excluding toggle elements)
+	$('.post-title, .section-title, p, li, span, a').not('.container-toggle, .container-toggle *').each(function () {
+		$(this).data('original-size', parseFloat($(this).css('font-size')));
+	});
+
+	// Font Slider
+	$('#textSizeSlider').on('input', function () {
+		let sliderValue = $(this).val(); // 12-36 for example
+
+		$('.post-title, .section-title, p, li, span, a, h2.title').not('.container-toggle, .container-toggle *').each(function () {
+			let original = $(this).data('original-size') || 16; // fallback
+			let scaleFactor = sliderValue / 16; // assume 16px is base
+			$(this).css('font-size', (original * scaleFactor) + 'px');
+		});
+	});
+
+	// Change font color
+	$('.font-color-toggle').on('change', function () {
+		if (this.checked) {
+			// uncheck all other toggles first
+			$('.font-color-toggle').not(this).prop('checked', false);
+
+			// select the same elements as the text size slider, excluding toggles
+			let $elements = $('.post-title, .section-title, p, li, span, a, h2.title').not('.container-toggle, .container-toggle *');
+
+			// apply color based on which toggle is switched on
+			if ($(this).hasClass('fc1')) {
+				$elements.css('color', '#20c8c3ff'); // teal
+			} else if ($(this).hasClass('fc2')) {
+				$elements.css('color', 'magenta');
+			} else if ($(this).hasClass('fc3')) {
+				$elements.css('color', 'pink');
+			}
+		} else {
+			// if toggle turned off -> reset to original color
+			$('.post-title, .section-title, p, li, span, a').not('.container-toggle, .container-toggle *').css('color', '');
+		}
+	});
 })(jQuery);

@@ -1706,8 +1706,8 @@ textarea.input {
 .toggle1 {
   font-size: 14px;
   position: relative;
-  width: 80px;
-  height: 40px;
+  width: 70px;
+  height: 30px;
   overflow: hidden;
 }
 
@@ -1727,8 +1727,8 @@ textarea.input {
 .toggle1 .toggle1-slider:before {
   position: absolute;
   content: "";
-  height: 20px;
-  width: 20px;
+  height: 10px;
+  width: 10px;
   border-radius: 20px;
   left: 7px;
   bottom: 10px;
@@ -1808,15 +1808,30 @@ textarea.input {
 }
 
 
+
 /* Font Change */
+
+@font-face {
+    font-family: 'OpenDyslexic';
+    src: url('../fonts/open-dyslexic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 .font-sample {
   margin-left: 40px;
   font-size: 26px;
   color: white;
 }
 .f1 { font-family: 'Arial', sans-serif; }
-.f2 { font-family: 'Times New Roman', Times, serif;}
+.f2 { font-family: 'OpenDyslexic', sans-serif;}
 .f3 { font-family: 'Comic Sans MS', sans-serif;}
 /* End Font Change */
+
+/* Font Color Change */
+.f-color-1 {background-color: #00adf2;}
+.f-color-2 {background-color: magenta;}
+.f-color-3 {background-color: pink;}
+/* End Font Color Change */
 
 /* ------- */
