@@ -77,11 +77,11 @@
 			}
 
 			// apply font to body and specific classes
-			$('body, .post-title, .section-title').css('font-family', font);
+			$('body, .post-title, .section-title, h2.title').css('font-family', font);
 
 		} else {
 			// reset font to default when unchecked
-			$('body, .post-title, .section-title').css('font-family', '');
+			$('body, .post-title, .section-title, h2.title').css('font-family', '');
 		}
 	});
 
@@ -129,7 +129,7 @@
 			// uncheck all other toggles first
 			$('.font-color-toggle').not(this).prop('checked', false);
 
-			// select the same elements as the text size slider, excluding toggles
+			// select the same elements
 			let $elements = $('.post-title, .section-title, p, li, span, a, h2.title').not('.container-toggle, .container-toggle *');
 
 			// apply color based on which toggle is switched on
@@ -141,8 +141,23 @@
 				$elements.css('color', 'pink');
 			}
 		} else {
-			// if toggle turned off -> reset to original color
-			$('.post-title, .section-title, p, li, span, a').not('.container-toggle, .container-toggle *').css('color', '');
+			// reset ALL the same elements
+			$('.post-title, .section-title, p, li, span, a, h2.title').not('.container-toggle, .container-toggle *')
+				.css('color', '');
 		}
 	});
+
+	// Animation control
+	$(document).ready(function () {
+		$(".animation-toggle").change(function () {
+			if ($(this).is(":checked")) {
+				// Turn animations OFF
+				$("body").addClass("no-animation");
+			} else {
+				// Turn animations ON
+				$("body").removeClass("no-animation");
+			}
+		});
+	});
+
 })(jQuery);

@@ -770,6 +770,15 @@ textarea.input {
   transform: scale(1.2);
 }
 
+/* Disable hover animation when .no-animation is on a parent */
+.no-animation .post-img>img {
+  transition: none !important;
+}
+
+.no-animation .post-img:hover>img {
+  transform: none !important;
+}
+
 .post .post-title {
   font-size: 18px;
 }
@@ -1833,5 +1842,87 @@ textarea.input {
 .f-color-2 {background-color: magenta;}
 .f-color-3 {background-color: pink;}
 /* End Font Color Change */
+
+
+/* Video & Animation Settings */
+.toggle-label {
+  margin-left: 40px;
+  font-size: 16px;
+  color: white;
+}
+
+.toggle2 {
+  font-size: 14px;
+  position: relative;
+  width: 70px;
+  height: 30px;
+  overflow: hidden;
+}
+
+.toggle2 input {
+  display: none;
+}
+
+.toggle2 .toggle2-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  transition: 0.4s;
+  border-radius: 100px;
+  background-color: #367C39;
+}
+
+.toggle2 .toggle2-slider:before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  border-radius: 20px;
+  left: 7px;
+  bottom: 10px;
+  background-color: #fff;
+  transition: 0.4s;
+}
+
+.toggle2 .text {
+  position: absolute;
+  top: 50%;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: 0.4s;
+}
+
+.toggle2 .text.on {
+  color: #fff;
+  left: 15px;
+  transform: translateX(-40px) translateY(-50%);
+}
+
+.toggle2 .text.off {
+  color: #fff;
+  right: 15px;
+}
+
+.toggle2 input:checked + .toggle2-slider {
+  background-color: #9a9999;
+}
+
+.toggle2 input:focus + .toggle2-slider {
+  box-shadow: 0 0 1px #9a9999;
+}
+
+.toggle2 input:checked + .toggle2-slider:before {
+  transform: translateX(45px);
+}
+
+.toggle2 input:checked ~ .text.off {
+  transform: translateX(45px) translateY(-50%);
+}
+
+.toggle2 input:checked ~ .text.on {
+  transform: translateX(0) translateY(-50%);
+}
+
+/* End of Video & Animation Settings */
 
 /* ------- */
