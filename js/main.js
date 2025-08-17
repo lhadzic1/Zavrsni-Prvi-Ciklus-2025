@@ -49,12 +49,19 @@
 
 			// apply background based on which one was switched on
 			if ($(this).hasClass('c1')) {
-				$('body').css('background-color', '#ffffff');
+				$('body').css('background-color', '#a5a988');
 			} else if ($(this).hasClass('c2')) {
-				$('body').css('background-color', 'black');
+				$('body').css('background-color', '#a893a4');
 			} else if ($(this).hasClass('c3')) {
-				$('body').css('background-color', 'lightpink');
+				$('body').css('background-color', '#e5c1a9');
+			} else if ($(this).hasClass('c4')) {
+				$('body').css('background-color', '#e4cca6');
+			} else if ($(this).hasClass('c5')) {
+				$('body').css('background-color', '#7695a8');
+			} else if ($(this).hasClass('c6')) {
+				$('body').css('background-color', '#bdd3c6');
 			}
+
 		} else {
 			// if the same toggle is turned off -> reset to original color
 			$('body').css('background-color', '');
@@ -131,15 +138,21 @@
 			$('.font-color-toggle').not(this).prop('checked', false);
 
 			// select the same elements
-			let $elements = $('.post-title, .section-title, p, li, span, a, h2.title, h1, h3').not('.container-toggle, .container-toggle *');
+			let $elements = $('.post-title, .section-title, p, li, span, a, h2.title, h1, h3').not('.container-toggle, .container-toggle *, #nav-aside, #nav-aside *');
 
 			// apply color based on which toggle is switched on
 			if ($(this).hasClass('fc1')) {
-				$elements.css('color', '#20c8c3ff'); // teal
+				$elements.css('color', '#2c3e50'); // teal
 			} else if ($(this).hasClass('fc2')) {
-				$elements.css('color', 'magenta');
+				$elements.css('color', '#f5e8c7');
 			} else if ($(this).hasClass('fc3')) {
-				$elements.css('color', 'pink');
+				$elements.css('color', '#1e3a5f');
+			} else if ($(this).hasClass('fc4')) {
+				$elements.css('color', '#0f3d3e');
+			} else if ($(this).hasClass('fc5')) {
+				$elements.css('color', '#4b1f3f');
+			} else if ($(this).hasClass('fc6')) {
+				$elements.css('color', '#4a2e1d');
 			}
 		} else {
 			// reset ALL the same elements
@@ -234,6 +247,14 @@
 			isReading = false;              // prevent further paragraphs
 		});
 	});
+
+	// jQuery: change background when color picker changes
+$('#colorPicker').on('input', function() {
+    let selectedColor = $(this).val(); // gets the hex color, e.g. "#ff0000"
+    $('body').css('background-color', selectedColor); // apply to background
+});
+
+
 
 })(jQuery);
 
