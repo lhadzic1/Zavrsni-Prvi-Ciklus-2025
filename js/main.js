@@ -40,6 +40,7 @@
 		responsive: true
 	});
 
+
 	// Change background color
 	$('.color-toggle').on('change', function () {
 		if (this.checked) {
@@ -77,11 +78,11 @@
 			}
 
 			// apply font to body and specific classes
-			$('body, .post-title, .section-title, h2.title').css('font-family', font);
+			$('body, .post-title, .section-title, h2.title, h1, h3').css('font-family', font);
 
 		} else {
 			// reset font to default when unchecked
-			$('body, .post-title, .section-title, h2.title').css('font-family', '');
+			$('body, .post-title, .section-title, h2.title, h1, h3').css('font-family', '');
 		}
 	});
 
@@ -108,7 +109,7 @@
 
 
 	// Store original sizes (excluding toggle elements)
-	$('.post-title, .section-title, p, li, span, a').not('.container-toggle, .container-toggle *').each(function () {
+	$('.post-title, .section-title, p, li, span, a, h1, h2.title, h3').not('.container-toggle, .container-toggle *').each(function () {
 		$(this).data('original-size', parseFloat($(this).css('font-size')));
 	});
 
@@ -116,7 +117,7 @@
 	$('#textSizeSlider').on('input', function () {
 		let sliderValue = $(this).val(); // 12-36 for example
 
-		$('.post-title, .section-title, p, li, span, a, h2.title').not('.container-toggle, .container-toggle *').each(function () {
+		$('.post-title, .section-title, p, li, span, a, h2.title, h1, h3').not('.container-toggle, .container-toggle *').each(function () {
 			let original = $(this).data('original-size') || 16; // fallback
 			let scaleFactor = sliderValue / 16; // assume 16px is base
 			$(this).css('font-size', (original * scaleFactor) + 'px');
@@ -130,7 +131,7 @@
 			$('.font-color-toggle').not(this).prop('checked', false);
 
 			// select the same elements
-			let $elements = $('.post-title, .section-title, p, li, span, a, h2.title').not('.container-toggle, .container-toggle *');
+			let $elements = $('.post-title, .section-title, p, li, span, a, h2.title, h1, h3').not('.container-toggle, .container-toggle *');
 
 			// apply color based on which toggle is switched on
 			if ($(this).hasClass('fc1')) {
@@ -142,7 +143,7 @@
 			}
 		} else {
 			// reset ALL the same elements
-			$('.post-title, .section-title, p, li, span, a, h2.title').not('.container-toggle, .container-toggle *')
+			$('.post-title, .section-title, p, li, span, a, h2.title, h1, h3').not('.container-toggle, .container-toggle *')
 				.css('color', '');
 		}
 	});
@@ -160,4 +161,80 @@
 		});
 	});
 
+	// Highlighted Reading Toggle
+
+	let highlightReadEnabled = false;
+
+	// Toggle switch
+	$('#highlightReadToggle').on('change', function () {
+		highlightReadEnabled = this.checked;
+	});
+
+	// Listen for text highlights
+	$(document).on('mouseup', function () {
+		if (!highlightReadEnabled) return; // do nothing if feature is off
+
+		let selectedText = window.getSelection().toString().trim();
+		if (selectedText) {
+			let utterance = new SpeechSynthesisUtterance(selectedText);
+			utterance.rate = 1;       // speed
+			utterance.pitch = 1;      // pitch
+			utterance.lang = 'en-US'; // language
+			window.speechSynthesis.speak(utterance);
+		}
+	});
+
+
+	$(document).ready(function () {
+		// Initially hide the read out loud buttons
+		$('#read-outloud').hide();
+
+		// Toggle speech control buttons visibility
+		$('#speechToggle').on('change', function () {
+			if (this.checked) {
+				$('#read-outloud').fadeIn();
+			} else {
+				$('#read-outloud').fadeOut();
+			}
+		});
+
+		let paragraphs = $('p').toArray();
+		let index = 0;
+		let utterance;
+		let isReading = false; // flag to control reading
+
+		function readParagraph(i) {
+			if (!isReading || i >= paragraphs.length) return;
+
+			let text = $(paragraphs[i]).text();
+			utterance = new SpeechSynthesisUtterance(text);
+			utterance.rate = 1;
+			utterance.pitch = 1;
+			utterance.lang = 'en-US';
+
+			utterance.onend = function () {
+				if (isReading) {
+					index++;
+					readParagraph(index);
+				}
+			};
+
+			window.speechSynthesis.speak(utterance);
+		}
+
+		$('#readAllBtn').on('click', function () {
+			window.speechSynthesis.cancel(); // stop any current speech
+			index = 0;
+			isReading = true;
+			readParagraph(index);
+		});
+
+		$('#stopAllBtn').on('click', function () {
+			window.speechSynthesis.cancel(); // stop current speech
+			isReading = false;              // prevent further paragraphs
+		});
+	});
+
 })(jQuery);
+
+
