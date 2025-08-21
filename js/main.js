@@ -85,11 +85,11 @@
 			}
 
 			// apply font to body and specific classes
-			$('body, .post-title, .section-title, h2.title, h1, h3').css('font-family', font);
+			$('body, .post-title, .section-title, h2.title, h1, h3, h2').css('font-family', font);
 
 		} else {
 			// reset font to default when unchecked
-			$('body, .post-title, .section-title, h2.title, h1, h3').css('font-family', '');
+			$('body, .post-title, .section-title, h2.title, h1, h3, h2').css('font-family', '');
 		}
 	});
 
@@ -103,7 +103,7 @@
 			let $el = $(this);
 
 			// Skip links and inputs inside #nav-aside
-			if ($el.closest('#nav-aside').length && ($el.is('a') || $el.is('input'))) {
+			if ($el.closest('#nav-aside').length && ($el.is('a') || $el.is('input') || $el.is('h2') || $el.is('span'))) {
 				return; // skip this element
 			}
 
