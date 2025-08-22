@@ -148,7 +148,7 @@
 			if ($(this).hasClass('fc1')) {
 				$elements.css('color', '#2c3e50'); // teal
 			} else if ($(this).hasClass('fc2')) {
-				$elements.css('color', '#f5e8c7');
+				$elements.css('color', '#4a3f05');
 			} else if ($(this).hasClass('fc3')) {
 				$elements.css('color', '#1e3a5f');
 			} else if ($(this).hasClass('fc4')) {
