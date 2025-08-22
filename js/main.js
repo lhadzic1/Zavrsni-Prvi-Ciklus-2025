@@ -49,18 +49,22 @@
 
 			// apply background based on which one was switched on
 			if ($(this).hasClass('c1')) {
-				$('body').css('background-color', '#a5a988');
+				$('body').css('background-color', '#c0c2b2ff');
 			} else if ($(this).hasClass('c2')) {
-				$('body').css('background-color', '#a893a4');
+				$('body').css('background-color', '#c6b5c3ff');
 			} else if ($(this).hasClass('c3')) {
 				$('body').css('background-color', '#e5c1a9');
 			} else if ($(this).hasClass('c4')) {
 				$('body').css('background-color', '#e4cca6');
 			} else if ($(this).hasClass('c5')) {
-				$('body').css('background-color', '#7695a8');
+				$('body').css('background-color', '#adc1ceff');
 			} else if ($(this).hasClass('c6')) {
 				$('body').css('background-color', '#bdd3c6');
+			} else if ($(this).hasClass('c7')) {
+				$('body').css('background-color', '#ffff72');
 			}
+
+
 
 		} else {
 			// if the same toggle is turned off -> reset to original color
@@ -103,12 +107,12 @@
 			let $el = $(this);
 
 			// Skip links and inputs inside #nav-aside
-			if ($el.closest('#nav-aside').length && ($el.is('a') || $el.is('input') || $el.is('h2') || $el.is('span'))) {
+			if ($el.closest('#nav-aside').length && ($el.is('a') || $el.is('input') || $el.is('h2') || $el.is('span') || $el.is('.toggle-label'))) {
 				return; // skip this element
 			}
 
 			// Only apply color to elements that contain text
-			if ($el.children().length === 0 || $el.is('span, p, h1, h2, h3, h4, h5, h6, li, a')) {
+			if ($el.children().length === 0 || $el.is('span, p, h1, h2, h3, h4, h5, h6, li, a, button')) {
 				$el.css('color', `hsl(0, 0%, ${lightness}%)`);
 			}
 		});
@@ -249,11 +253,46 @@
 	});
 
 	// jQuery: change background when color picker changes
-$('#colorPicker').on('input', function() {
-    let selectedColor = $(this).val(); // gets the hex color, e.g. "#ff0000"
-    $('body').css('background-color', selectedColor); // apply to background
-});
+	$('#colorPicker').on('input', function () {
+		let selectedColor = $(this).val(); // gets the hex color, e.g. "#ff0000"
+		$('body').css('background-color', selectedColor); // apply to background
+	});
 
+	$('#darkToggle').on('change', function () {
+		if (this.checked) {
+			// uncheck all other toggles first
+			$('.color-toggle').not(this).prop('checked', false);
+
+			// apply background based on which one was switched on
+			$('#nav-logo-change').attr("src", "img/MY_LOGO_S_clear_white.png");
+			$('body').css('background-color', '#2d2d2dff');
+			let $elements = $('.post-title, .section-title, p, li, span, a, h1, h3, i, button').not('.container-toggle, .container-toggle *, #nav-aside, #nav-aside *');
+			$elements.css('color', '#E5E5E5');
+
+		} else {
+			// if the same toggle is turned off -> reset to original color
+			$('#nav-logo-change').attr("src", "img/MY_LOGO_S_clear.png");
+			$('body').css('background-color', '');
+			$('.post-title, .section-title, p, li, span, a, h1, h3, i, button').not('.container-toggle, .container-toggle *').css('color', '');
+		}
+	});
+
+	$(document).ready(function () {
+		// Show button after scrolling down 100px
+		$(window).scroll(function () {
+			if ($(this).scrollTop() > 100) {
+				$('#back-to-top').fadeIn();
+			} else {
+				$('#back-to-top').fadeOut();
+			}
+		});
+
+		// Scroll to top when clicked
+		$('#back-to-top').click(function () {
+			$('html, body').animate({ scrollTop: 0 }, 500); // 500ms animation
+			return false;
+		});
+	});
 
 
 })(jQuery);

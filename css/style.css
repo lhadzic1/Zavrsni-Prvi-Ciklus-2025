@@ -1802,10 +1802,10 @@ textarea.input {
 }
 
 .color-1 {
-  background-color: #a5a988;
+  background-color: #c0c2b2ff;
 }
 .color-2 {
-  background-color: #a893a4;
+  background-color: #c6b5c3ff;
 }
 .color-3 {
   background-color: #e5c1a9;
@@ -1814,10 +1814,13 @@ textarea.input {
   background-color: #e4cca6;
 }
 .color-5 {
-  background-color: #7695a8;
+  background-color: #adc1ceff;
 }
 .color-6 {
   background-color: #bdd3c6;
+}
+.color-7 {
+  background-color: #ffff72;
 }
 
 
@@ -2001,4 +2004,20 @@ textarea.input {
 .submit-my:hover, .submit-my:focus {
   background-color: transparent;
   color: #367C39;
+}
+
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none; /* hide initially */
+    padding: 10px 15px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#back-to-top:hover {
+    background-color: #555;
 }

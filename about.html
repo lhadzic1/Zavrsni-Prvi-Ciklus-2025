@@ -33,7 +33,7 @@
 <body>
 	<!-- HEADER -->
 	<header id="header">
-		<!-- NAV -->
+			<!-- NAV -->
 		<div id="nav">
 			<!-- Top Nav -->
 			<div id="nav-top">
@@ -49,14 +49,15 @@
 
 					<!-- logo -->
 					<div class="nav-logo">
-						<a href="index.html" class="logo"><img src="./img/MY_LOGO_S_clear.png" alt=""></a>
+						<a href="index.html" class="logo"><img src="./img/MY_LOGO_S_clear.png" alt="" id="nav-logo-change"></a>
 					</div>
 					<!-- /logo -->
 
 					<!-- search & aside toggle -->
 					<div class="nav-btns">
-						<button class="aside-btn"> Settings </Search><i class="fa fa-bars"></i></button>
+						<button class="aside-btn"> Settings <i class="fa fa-bars"></i></button>
 						<button class="search-btn"> Search <i class="fa fa-search"></i></button>
+						<button class="help-btn" id="openHelp"> Help <i class="fa fa-question-circle"></i></button>
 						<div id="nav-search">
 							<form>
 								<input class="input" name="search" placeholder="Enter your search...">
@@ -70,6 +71,37 @@
 				</div>
 			</div>
 			<!-- /Top Nav -->
+
+			<!-- Help -->
+			<div id="helpModal" class="modal">
+				<div class="modal-content" style="text-align: left;">
+					<span class="close">&times;</span>
+
+					<h2 style="margin-bottom: 20px;">Help</h2>
+
+					<h3>Accessibility & Personalization Settings</h3>
+					<p>
+						Our website includes features that allow you to customize the interface to your needs:
+					</p>
+
+					<ul style="list-style-type: disc; padding-left: 20px;">
+						<li><strong>Background Colors & Themes</strong> - Choose between different color schemes,
+							including muted and high-contrast options.</li>
+						<li><strong>Font Style & Size</strong> - Adjust the font family and size for easier readability.
+						</li>
+						<li><strong>Contrast Control</strong> - Increase or decrease text contrast.</li>
+						<li><strong>Animation Settings</strong> - Enable or disable interface animations to reduce
+							distractions.</li>
+						<li><strong>Voice Controls</strong> - Use voice controls to turn on and off out-loud reading.
+						</li>
+					</ul>
+
+					<p>
+						You can access these options anytime by going to <strong>Settings</strong>.
+					</p>
+				</div>
+			</div>
+
 
 			<!-- Main Nav -->
 			<div id="nav-bottom">
@@ -91,6 +123,7 @@
 
 			<!-- Aside Nav -->
 			<div id="nav-aside">
+				<h2 style="color: white;"> Settings</h2>
 				<ul class="nav-aside-menu">
 					<li class="has-dropdown"><a> Change Background Color</a>
 						<ul class="dropdown">
@@ -177,6 +210,38 @@
 								</div>
 							</li>
 							<!-- /Boja pozadine 6-->
+
+							<!-- Boja pozadine 6-->
+							<li>
+								<div class="container-toggle c7">
+									<label class="toggle1">
+										<input type="checkbox" class="color-toggle c7" />
+										<span class="toggle1-slider"></span>
+										<span class="on text">On</span>
+										<span class="off text">Off</span>
+									</label>
+									<div class="bg-color color-7"> </div>
+								</div>
+							</li>
+							<!-- /Boja pozadine 6-->
+						</ul>
+					</li>
+					<!--  Themes -->
+					<li class="has-dropdown"><a>Themes</a>
+						<ul class="dropdown">
+							<!-- Darkmode -->
+							<li>
+								<div class="container-toggle">
+									<label class="toggle1">
+										<input type="checkbox" id="darkToggle" />
+										<span class="toggle1-slider"></span>
+										<span class="on text">On</span>
+										<span class="off text">Off</span>
+									</label>
+									<div class="toggle-label">Dark mode</div>
+								</div>
+							</li>
+							<!-- /Dark mode-->
 						</ul>
 					</li>
 
@@ -276,6 +341,40 @@
 									<div class="bg-color f-color-3"> </div>
 								</div>
 							</li>
+
+							<li>
+								<div class="container-toggle fc4">
+									<label class="toggle1">
+										<input type="checkbox" class="font-color-toggle fc4" />
+										<span class="toggle1-slider"></span>
+										<span class="on text">On</span>
+										<span class="off text">Off</span>
+									</label>
+									<div class="bg-color f-color-4"> </div>
+								</div>
+							</li>
+							<li>
+								<div class="container-toggle fc5">
+									<label class="toggle1">
+										<input type="checkbox" class="font-color-toggle fc5" />
+										<span class="toggle1-slider"></span>
+										<span class="on text">On</span>
+										<span class="off text">Off</span>
+									</label>
+									<div class="bg-color f-color-5"> </div>
+								</div>
+							</li>
+							<li>
+								<div class="container-toggle fc6">
+									<label class="toggle1">
+										<input type="checkbox" class="font-color-toggle fc6" />
+										<span class="toggle1-slider"></span>
+										<span class="on text">On</span>
+										<span class="off text">Off</span>
+									</label>
+									<div class="bg-color f-color-6"> </div>
+								</div>
+							</li>
 							<!-- /Font Color -->
 						</ul>
 					</li>
@@ -329,13 +428,8 @@
 								</div>
 							</li>
 							<!-- /Speech Control -->
-
 						</ul>
-					</li>
-
-
-				</ul>
-				<button class="nav-close nav-aside-close"><span></span></button>
+						<button class="nav-close nav-aside-close"><span></span></button>
 			</div>
 			<!-- /Aside Nav -->
 		</div>
@@ -356,6 +450,7 @@
 		<!-- /PAGE HEADER -->
 	</header>
 	<!-- /HEADER -->
+	 <button id="back-to-top">Back To Top  <i class="fa fa-arrow-up"></i></button>
 
 	<!-- SECTION -->
 	<div class="section">
@@ -475,6 +570,7 @@
 			<!-- /row -->
 		</div>
 		<!-- /container -->
+
 	</footer>
 	<!-- /FOOTER -->
 
@@ -483,6 +579,30 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.stellar.min.js"></script>
 	<script src="js/main.js"></script>
+
+	<!--Help window-->
+	<script>
+		const modal = document.getElementById("helpModal");
+		const btn = document.getElementById("openHelp");
+		const closeBtn = document.querySelector(".modal .close");
+
+		// Open modal
+		btn.onclick = function () {
+			modal.style.display = "block";
+		}
+
+		// Close modal
+		closeBtn.onclick = function () {
+			modal.style.display = "none";
+		}
+
+		// Close modal if clicking outside content
+		window.onclick = function (event) {
+			if (event.target === modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
 
 </body>
 
