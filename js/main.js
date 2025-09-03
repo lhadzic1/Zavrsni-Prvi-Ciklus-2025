@@ -146,7 +146,7 @@
 
 			// apply color based on which toggle is switched on
 			if ($(this).hasClass('fc1')) {
-				$elements.css('color', '#2c3e50'); // teal
+				$elements.css('color', '#2c3e50');
 			} else if ($(this).hasClass('fc2')) {
 				$elements.css('color', '#4a3f05');
 			} else if ($(this).hasClass('fc3')) {
